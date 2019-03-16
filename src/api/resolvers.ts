@@ -1,7 +1,32 @@
+import { Context } from './../context';
+import { Todo } from '../domain/TodoService';
 export const resolvers = {
   Query: {
-    listTodos: async () => {
-      return [];
+    listTodos: async (_, __, ctx: Context) => {
+      const { todoService } = ctx;
+      return todoService.listTodos(ctx, {});
+    },
+  },
+  Mutation: {
+    createTodo: async (_, { input }, ctx: Context) => {
+      const todo = await ctx.todoService.createTodo(ctx, { text: input.text });
+      return { todo };
+    },
+    completeTodo: async (_, { input }, ctx: Context) => {
+      const todo = await ctx.todoService.completeTodo(ctx, { id: input.id });
+      return { todo };
+    },
+    deleteTodo: async (_, { input }, ctx: Context) => {
+      const { id } = input;
+      await ctx.todoService.deleteTodo(ctx, { id });
+      return { id };
+    },
+  },
+  Todo: {
+    createdBy: async ({ createdBy }: Todo, _, ctx: Context) => {
+      const { userService } = ctx;
+      const users = await userService.getUsers(ctx, { ids: [createdBy] });
+      return users[createdBy];
     },
   },
 };

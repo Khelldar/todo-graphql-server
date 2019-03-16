@@ -4,6 +4,7 @@ import * as express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from './api/typeDefs';
 import { resolvers } from './api/resolvers';
+import { context } from './context';
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use('/healthy', (req, res) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-
+  context,
   introspection: true,
   playground: true,
 });

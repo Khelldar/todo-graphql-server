@@ -1,9 +1,15 @@
 import { User } from '../domain/UserService';
 import { UserStore } from './UserStore';
 
-const users: User[] = [];
+const users: User[] = [
+  {
+    id: 'default-user',
+    firstName: 'Jon',
+    lastname: 'Snow',
+  },
+];
 
-export const userStore: UserStore = {
+export const inMemoryUserStore: UserStore = {
   getUsers: async ids => {
     return users
       .filter(({ id }) => ids.includes(id))

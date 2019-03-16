@@ -1,7 +1,20 @@
 import { Todo } from './../domain/TodoService';
 import { TodoStore } from './TodoStore';
 
-const todos: Todo[] = [];
+const todos: Todo[] = [
+  {
+    id: 'a7b0de7d-7329-4df7-9a3e-172306fe9f9b',
+    text: 'Make todo app',
+    createdBy: 'default-user',
+    completed: false,
+  },
+  {
+    id: 'a662b343-452b-4024-ba8b-41678c54b21b',
+    text: 'Use todo app to demonstrate some stuff.',
+    createdBy: 'default-user',
+    completed: false,
+  },
+];
 
 export const inMemoryTodoStore: TodoStore = {
   listTodos: async () => {
