@@ -14,6 +14,24 @@ const todos: Todo[] = [
     createdBy: 'default-user',
     completed: false,
   },
+  {
+    id: 'a662b343-452b-4024-ba8b-41678c54b21c',
+    text: 'Disagree with the council.',
+    createdBy: '1',
+    completed: true,
+  },
+  {
+    id: 'a662b343-452b-4024-ba8b-41678c54b21d',
+    text: `Get swayed by someone who's obviously the bad guy.`,
+    createdBy: '1',
+    completed: false,
+  },
+  {
+    id: 'a662b343-452b-4024-ba8b-41678c54b21e',
+    text: `Invent a new word for "children".`,
+    createdBy: '1',
+    completed: false,
+  },
 ];
 
 export const inMemoryTodoStore: TodoStore = {

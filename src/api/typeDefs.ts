@@ -6,15 +6,28 @@ export const typeDefs = gql`
     SHARED
   }
 
-  type Query {
-    listTodos: [Todo!]!
-  }
-
   type Mutation {
     createTodo(input: CreateTodoInput!): CreateTodoOutput!
     completeTodo(input: CompleteTodoInput!): CompleteTodoOutput!
     deleteTodo(input: DeleteTodoInput!): DeleteTodoOutput!
   }
+
+  type Query {
+    listTodos: [Todo!]!
+  }
+
+  # type Query {
+  #   listTodos(input: ListTodosInput!): ListTodosOutput!
+  # }
+
+  # input ListTodosInput {
+  #   first: Int
+  #   after: String
+  # }
+  # type ListTodosOutput {
+  #   todos: [Todo!]!
+  #   cursor: String
+  # }
 
   input CreateTodoInput {
     text: String!
@@ -41,13 +54,13 @@ export const typeDefs = gql`
     id: ID!
     text: String!
     completed: Boolean!
-    createdBy: User
+    createdBy: User!
     type: TodoType
   }
 
   type User {
     id: ID!
     firstName: String!
-    lastName: String
+    lastName: String!
   }
 `;

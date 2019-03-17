@@ -1,5 +1,11 @@
 export type Maybe<T> = T | null;
 
+export interface ListTodosInput {
+  first?: Maybe<number>;
+
+  after?: Maybe<string>;
+}
+
 export interface CreateTodoInput {
   text: string;
 }
@@ -34,7 +40,13 @@ export type Upload = any;
 // ====================================================
 
 export interface Query {
-  listTodos: Todo[];
+  listTodos: ListTodosOutput;
+}
+
+export interface ListTodosOutput {
+  todos: Todo[];
+
+  cursor?: Maybe<string>;
 }
 
 export interface Todo {
@@ -54,7 +66,7 @@ export interface User {
 
   firstName: string;
 
-  lastName?: Maybe<string>;
+  lastName: string;
 }
 
 export interface Mutation {
@@ -81,6 +93,9 @@ export interface DeleteTodoOutput {
 // Arguments
 // ====================================================
 
+export interface ListTodosQueryArgs {
+  input: ListTodosInput;
+}
 export interface CreateTodoMutationArgs {
   input: CreateTodoInput;
 }
@@ -139,14 +154,36 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 
 export namespace QueryResolvers {
   export interface Resolvers<Context = {}, TypeParent = {}> {
-    listTodos?: ListTodosResolver<Todo[], TypeParent, Context>;
+    listTodos?: ListTodosResolver<ListTodosOutput, TypeParent, Context>;
   }
 
-  export type ListTodosResolver<R = Todo[], Parent = {}, Context = {}> = Resolver<
-    R,
-    Parent,
-    Context
-  >;
+  export type ListTodosResolver<
+    R = ListTodosOutput,
+    Parent = {},
+    Context = {}
+  > = Resolver<R, Parent, Context, ListTodosArgs>;
+  export interface ListTodosArgs {
+    input: ListTodosInput;
+  }
+}
+
+export namespace ListTodosOutputResolvers {
+  export interface Resolvers<Context = {}, TypeParent = ListTodosOutput> {
+    todos?: TodosResolver<Todo[], TypeParent, Context>;
+
+    cursor?: CursorResolver<Maybe<string>, TypeParent, Context>;
+  }
+
+  export type TodosResolver<
+    R = Todo[],
+    Parent = ListTodosOutput,
+    Context = {}
+  > = Resolver<R, Parent, Context>;
+  export type CursorResolver<
+    R = Maybe<string>,
+    Parent = ListTodosOutput,
+    Context = {}
+  > = Resolver<R, Parent, Context>;
 }
 
 export namespace TodoResolvers {
@@ -195,7 +232,7 @@ export namespace UserResolvers {
 
     firstName?: FirstNameResolver<string, TypeParent, Context>;
 
-    lastName?: LastNameResolver<Maybe<string>, TypeParent, Context>;
+    lastName?: LastNameResolver<string, TypeParent, Context>;
   }
 
   export type IdResolver<R = string, Parent = User, Context = {}> = Resolver<
@@ -208,7 +245,7 @@ export namespace UserResolvers {
     Parent,
     Context
   >;
-  export type LastNameResolver<R = Maybe<string>, Parent = User, Context = {}> = Resolver<
+  export type LastNameResolver<R = string, Parent = User, Context = {}> = Resolver<
     R,
     Parent,
     Context
@@ -338,6 +375,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<Upload, any>
 
 export interface IResolvers<Context = {}> {
   Query?: QueryResolvers.Resolvers<Context>;
+  ListTodosOutput?: ListTodosOutputResolvers.Resolvers<Context>;
   Todo?: TodoResolvers.Resolvers<Context>;
   User?: UserResolvers.Resolvers<Context>;
   Mutation?: MutationResolvers.Resolvers<Context>;

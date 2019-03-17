@@ -4,12 +4,12 @@ const uuid = require('uuid/v4');
 export interface User {
   id: string;
   firstName: string;
-  lastname: string;
+  lastName: string;
 }
 
 export interface UserService {
   getUsers(ctx: Context, input: { ids: string[] }): Promise<Record<string, User>>;
-  createUser(ctx: Context, input: { firstName: string; lastname: string }): Promise<User>;
+  createUser(ctx: Context, input: { firstName: string; lastName: string }): Promise<User>;
 }
 
 export const userService: UserService = {

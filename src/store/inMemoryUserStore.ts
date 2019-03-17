@@ -4,8 +4,13 @@ import { UserStore } from './UserStore';
 const users: User[] = [
   {
     id: 'default-user',
-    firstName: 'Jon',
-    lastname: 'Snow',
+    firstName: 'Chris',
+    lastName: 'Langager',
+  },
+  {
+    id: '1',
+    firstName: 'Anakin',
+    lastName: 'Skywalker',
   },
 ];
 
