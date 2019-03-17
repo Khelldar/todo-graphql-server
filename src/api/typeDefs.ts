@@ -1,6 +1,11 @@
 import { gql } from 'apollo-server-core';
 
 export const typeDefs = gql`
+  enum TodoType {
+    PRIVATE
+    SHARED
+  }
+
   type Query {
     listTodos: [Todo!]!
   }
@@ -37,6 +42,7 @@ export const typeDefs = gql`
     text: String!
     completed: Boolean!
     createdBy: User!
+    type: TodoType
   }
 
   type User {

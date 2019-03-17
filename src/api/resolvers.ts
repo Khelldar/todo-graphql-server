@@ -4,7 +4,8 @@ export const resolvers = {
   Query: {
     listTodos: async (_, __, ctx: Context) => {
       const { todoService } = ctx;
-      return todoService.listTodos(ctx, {});
+      const todos = await todoService.listTodos(ctx, {});
+      return todos;
     },
   },
   Mutation: {
