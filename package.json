@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate": "gql-gen",
     "dev": "ts-node-dev src/index.ts --watch"
   },
   "keywords": [],
@@ -11,9 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "graphql-code-generator": "^0.18.0",
-    "graphql-codegen-typescript-common": "^0.18.0",
-    "graphql-codegen-typescript-resolvers": "^0.18.0",
-    "graphql-codegen-typescript-server": "^0.18.0",
+    "graphql-codegen-typescript-common": "0.16.1",
+    "graphql-codegen-typescript-resolvers": "0.16.1",
+    "graphql-codegen-typescript-server": "0.16.1",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "^3.3.3333"
   },

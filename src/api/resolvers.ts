@@ -1,8 +1,9 @@
 import { Context } from './../context';
 import { Todo } from '../domain/TodoService';
+
 export const resolvers = {
   Query: {
-    listTodos: async (_, __, ctx: Context) => {
+    listTodos: async (_, __, ctx) => {
       const { todoService } = ctx;
       const todos = await todoService.listTodos(ctx, {});
       return todos;

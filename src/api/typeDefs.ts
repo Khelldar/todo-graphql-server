@@ -41,7 +41,7 @@ export const typeDefs = gql`
     id: ID!
     text: String!
     completed: Boolean!
-    createdBy: User!
+    createdBy: User
     type: TodoType
   }
 
